@@ -1,0 +1,35 @@
+<html>
+	<head>
+		<script src="next-client.js"></script>
+	</head>
+	<body>
+		<input id="theme" placeholder="Theme ID"><br>
+		<input id="email" placeholder="me@example.com"><br>
+		<textarea id="opportunity" placeholder="Enter opportunity..."></textarea><br>
+		<button id="button">Create</button>
+	</body>
+
+	<script>
+		const buttonEl = document.getElementById('button');
+
+		// Post opportunities when the user clicks the [Create] button
+		buttonEl.addEventListener('click', () => {
+			buttonEl.disabled = true;
+
+			// Capture values from UI
+			const themeId = document.getElementById('theme').value;
+			const email = document.getElementById('email').value;
+			const opportunity = document.getElementById('opportunity').value;
+
+			// Post opportunity
+			postOpportunity(themeId, email, opportunity)
+				.then(response => {
+					alert(response);
+				})
+				.catch(err => alert(`Error: ${err}`))
+				.finally(() => {
+					buttonEl.disabled = false;
+				});
+		});
+	</script>
+</html>
