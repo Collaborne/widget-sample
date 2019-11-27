@@ -11,7 +11,7 @@ const API_ENDPOINT = `https://api.${TENANT}.nextapp.co/v1/opportunities`;
  * @param {string} opportunity
  * @returns {Promise}
  */
-function postOpportunity(themeId, email, opportunity) {
+async function postOpportunity(themeId, email, opportunity) {
 	// Create payload for NEXT request
 	const data = {
 		email,
@@ -22,19 +22,17 @@ function postOpportunity(themeId, email, opportunity) {
 	};
 
 	// Send request to NEXT
-	return Promise.resolve().then(async () => {
-		const response = await fetch(API_ENDPOINT, {
-			method: 'POST',
-			cache: 'no-cache',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(data),
-		});
-		const json = await response.json();
-		return {
-			isNewUser: json.is_new_user,
-			link: `https://${TENANT}.nextapp.co/app/theme/${json.theme_id}/opportunities`,
-		};
+	const response = await fetch(API_ENDPOINT, {
+		method: 'POST',
+		cache: 'no-cache',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(data),
 	});
+	const json = await response.json();
+	return {
+		isNewUser: json.is_new_user,
+		link: `https://${TENANT}.nextapp.co/app/theme/${json.theme_id}/opportunities`,
+	};
 }
