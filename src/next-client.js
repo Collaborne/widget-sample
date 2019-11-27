@@ -2,6 +2,7 @@
 const TENANT = 'example';
 const TOKEN = 'my-next-token';
 const API_ENDPOINT = `https://api.${TENANT}.nextapp.co/v1/opportunities`;
+const APP_ENDPOINT = `https://${TENANT}.nextapp.co/app/`;
 
 /**
  * Posts an opportunity
@@ -33,6 +34,6 @@ async function postOpportunity(themeId, email, opportunity) {
 	const json = await response.json();
 	return {
 		isNewUser: json.is_new_user,
-		link: `https://${TENANT}.nextapp.co/app/theme/${json.theme_id}/opportunities`,
+		link: `${APP_ENDPOINT}theme/${json.theme_id}/opportunities`,
 	};
 }
