@@ -1,7 +1,7 @@
 // Constants
 const TENANT = 'example';
 const TOKEN = 'my-next-token';
-const API_ENDPOINT = `https://api.${TENANT}.nextapp.co/v1/opportunities`;
+const API_ENDPOINT = `https://${TENANT}.api.nextapp.co/v1/opportunities`;
 const APP_ENDPOINT = `https://${TENANT}.nextapp.co/app/`;
 
 /**
