@@ -31,8 +31,9 @@ This repository contains different examples for widgets:
 * [Theme page example](examples/theme-page.html): A styled theme page which contains a widget to submit opportunities for this theme.
 
 To run the examples:
-1. Open the HTML file in an editor and adjust the constants on top of the file.
-2. Open the HTML file in your browser (it's not necessary to run them on a server).
+1. Download the HTML file to your computer
+2. Adjust the constants on top of the HTML file
+3. Open the HTML file in your browser (it's not necessary to run them on a server)
 
 ## API reference
 
