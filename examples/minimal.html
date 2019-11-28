@@ -1,15 +1,48 @@
 <html>
 	<head>
-		<script src="../src/next-client.js"></script>
+		<script>
+			// TODO: ADJUST THESE CONSTANTS
+			const TENANT = 'my-tenant';
+			const TOKEN = '12345678-1234-1234-1234-123456789012';
+		</script>
 	</head>
 	<body>
 		<input id="theme" placeholder="Theme ID"><br>
 		<input id="email" placeholder="me@example.com"><br>
-		<input id="name" placeholder="Opportunity name"><br>
+		<input id="name" placeholder="Opportunity"><br>
 		<button id="button">Create</button>
 	</body>
 
 	<script>
+		const API_ENDPOINT = `https://${TENANT}.api.nextapp.co/v1/opportunities`;
+
+		async function postOpportunity(themeId, email, name) {
+			// Create payload for NEXT request
+			const data = {
+				email,
+				opportunity: {
+					name,
+				},
+				tenant: TENANT,
+				theme_id: themeId,
+				token: TOKEN,
+			};
+
+			// Send request to NEXT
+			const response = await fetch(API_ENDPOINT, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(data),
+			});
+			const json = await response.json();
+			if (!response.ok) {
+				throw new Error(`${json.reason} (${json.details || '-'})`);
+			}
+			return json;
+		}
+
 		const buttonEl = document.getElementById('button');
 
 		// Post opportunities when the user clicks the [Create] button

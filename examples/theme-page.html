@@ -1,0 +1,139 @@
+<html>
+	<head>
+		<script>
+			// TODO: ADJUST THESE CONSTANTS
+			const TENANT = 'my-tenant';
+			const TOKEN = '12345678-1234-1234-1234-123456789012';
+			// Set the email based on the currently logged in user
+			const EMAIL = 'joe@example.com';
+			// Look up the theme ID in the NEXT application
+			const THEME_ID = '12345678-1234-1234-1234-123456789012';
+		</script>
+		<style>
+			body, textarea {
+				font-family: Arial, Helvetica, sans-serif;
+			}
+
+			.intro {
+				margin-bottom: 16px;
+			}
+
+			.widget {
+				display: inline-block;
+				background: #f9f9f9;
+				padding: 32px;
+				border-radius: 5px;
+				border: 1px solid #ccc;
+			}
+
+			.widget h2 {
+				margin-top: 0;
+			}
+
+			input, textarea {
+				margin-bottom: 8px;
+				width: 400px;
+				border-radius: 5px;
+				padding: 8px;
+				border: 1px solid #ccc;
+			}
+
+			#feedback {
+				font-weight: bold;
+			}
+
+			button {
+				background: #d81b60;
+				color: white;
+				padding: 8px 32px;
+				border: 0;
+				margin-top: 8px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Theme "Sustainability"</h1>
+		<div class="intro">Sustainability is one of our main organizational innovation areas.</div>
+		<div class="intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec velit ut purus vehicula blandit. Vestibulum fringilla ex justo, venenatis ultrices justo eleifend non. Vivamus faucibus lectus justo, in dictum augue imperdiet fermentum. Nunc ornare magna nibh, nec euismod arcu hendrerit ac. Pellentesque a est ut risus luctus hendrerit. Proin egestas ante vel efficitur faucibus. Aliquam ut purus massa. Maecenas vel mi risus.</div>
+
+		<div class="widget">
+			<h2>Submit an opportunity</h2>
+			<div class="intro">Do you have a great opportunity around Sustainability? Please submit it here!</div>
+			<form id="form">
+				<input id="name" placeholder="Opportunity name"><br>
+				<textarea id="description" placeholder="Description" rows="5"></textarea><br>
+				<input id="labels" placeholder="Labels (comma separated)"><br>
+				<button id="button">Submit</button>
+			</form>
+			<div id="feedback"></div>
+		</div>
+	</body>
+
+	<script>
+		const API_ENDPOINT = `https://${TENANT}.api.nextapp.co/v1/opportunities`;
+		const APP_ENDPOINT = `https://${TENANT}.nextapp.co/app/`;
+
+		async function postOpportunity(themeId, email, name, description, labelsStr) {
+			// Extract list of labels from comma-separated list of labels
+			const labels = labelsStr ? labelsStr.split(',').map(label => label.trim()) : undefined;
+
+			// Create payload for NEXT request
+			const data = {
+				email,
+				opportunity: {
+					name,
+					description,
+					labels,
+				},
+				tenant: TENANT,
+				theme_id: themeId,
+				token: TOKEN,
+			};
+
+			// Send request to NEXT
+			const response = await fetch(API_ENDPOINT, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(data),
+			});
+			const json = await response.json();
+			if (!response.ok) {
+				throw new Error(`${json.reason} (${json.details || '-'})`);
+			}
+			return {
+				isNewUser: json.is_new_user,
+				link: `${APP_ENDPOINT}theme/${json.theme_id}/opportunities`,
+			};
+		}
+
+		const buttonEl = document.getElementById('button');
+
+		// Post opportunities when the user clicks the [Create] button
+		buttonEl.addEventListener('click', async () => {
+			buttonEl.disabled = true;
+
+			// Capture values from UI
+			const name = document.getElementById('name').value;
+			const description = document.getElementById('description').value;
+			const labels = document.getElementById('labels').value;
+
+			const formEl = document.getElementById('form');
+			const feedbackEl = document.getElementById('feedback');
+
+			// Post opportunity
+			try {
+				const response = await postOpportunity(THEME_ID, EMAIL, name, description, labels);
+				feedbackEl.innerHTML = `
+					${response.isNewUser ? 'We created a NEXT account for you! Check your emails.' : 'Opportunity was posted under your NEXT accout.'}<br>
+					Opportunity was created! <a href="${response.link}">View in NEXT</a>
+				`;
+			} catch (err) {
+				feedbackEl.innerText = `[!!!] ${err}`;
+			}
+
+			formEl.style.display = 'none';
+		});
+	</script>
+</html>
