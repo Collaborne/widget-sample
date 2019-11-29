@@ -71,7 +71,6 @@
 
 	<script>
 		const API_ENDPOINT = `https://${TENANT}.api.nextapp.co/v1/opportunities`;
-		const APP_ENDPOINT = `https://${TENANT}.nextapp.co/app/`;
 
 		async function postOpportunity(themeId, email, name, description, labelsStr) {
 			// Extract list of labels from comma-separated list of labels
@@ -102,10 +101,7 @@
 			if (!response.ok) {
 				throw new Error(`${json.reason} (${json.details || '-'})`);
 			}
-			return {
-				isNewUser: json.is_new_user,
-				link: `${APP_ENDPOINT}theme/${json.theme_id}/opportunities`,
-			};
+			return json;
 		}
 
 		const buttonEl = document.getElementById('button');
@@ -126,7 +122,7 @@
 			try {
 				const response = await postOpportunity(THEME_ID, EMAIL, name, description, labels);
 				feedbackEl.innerHTML = `
-					${response.isNewUser ? 'We created a NEXT account for you! Check your emails.' : 'Opportunity was posted under your NEXT accout.'}<br>
+					${response.is_new_user ? 'We created a NEXT account for you! Check your emails.' : 'Opportunity was posted under your NEXT accout.'}<br>
 					Opportunity was created! <a href="${response.link}">View in NEXT</a>
 				`;
 			} catch (err) {
