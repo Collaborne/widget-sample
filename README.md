@@ -2,10 +2,11 @@
 
 Example of a widget that connects to the NEXT platform using the NEXT integration API.
 
-_Note: This is an example for a "work-in-progress" integration API. Changes may happen while we're finalizing the API._
+Sample widget | Opportunity posted from widget
+------------- | -------------
+![Sample widget](img/widget-screenshot.png) | ![Opportunity posted from widget](img/theme-screenshot.png)
 
-![Sample widget](img/widget-screenshot.png)
-![Opportunity posted from widget](img/theme-screenshot.png)
+_Note: This is an example for a "work-in-progress" integration API. Changes may happen while we're finalizing the API._
 
 ## Background
 
