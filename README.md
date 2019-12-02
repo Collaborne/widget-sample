@@ -2,7 +2,7 @@
 
 Example of a widget that connects to the NEXT platform using the NEXT integration API.
 
-Sample widget | Opportunity posted from widget
+Sample widget | NEXT theme page
 ------------- | -------------
 ![Sample widget](img/widget-screenshot.png) | ![Opportunity posted from widget](img/theme-screenshot.png)
 
