@@ -61,6 +61,14 @@ Please review the following considerations before deploying this or a simple wid
 
 You can file questions about the widget sample as a Github ticket. Please **do not include any private data** into Github tickets because they are visible to everybody. To include private data, please file a request with [NEXT Support](https://support.nextapp.co).
 
+## Fair usage policy
+
+The widget/Integration API is covered NEXT's fair usage policy. In a nutshell: Use it as it's intented to be used.
+
+Please contact us beforehand in case you consider to:
+* Mass-important existing opportunities
+* Open the widget to the general public, expecting many opportunities to be created (more than opportunities posted per seconds in average)
+
 ## FAQ
 
 ### Q: How can I show a themes selector?
