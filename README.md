@@ -67,7 +67,7 @@ The widget/Integration API is covered NEXT's fair usage policy. In a nutshell: U
 
 Please contact us beforehand in case you consider to:
 * Mass-important existing opportunities
-* Open the widget to the general public, expecting many opportunities to be created (more than opportunities posted per seconds in average)
+* Open the widget to the general public, expecting many opportunities to be created (more than 5 opportunities posted per seconds in average)
 
 ## FAQ
 
