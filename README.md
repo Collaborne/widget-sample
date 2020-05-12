@@ -29,7 +29,7 @@ Tip: You might have to allow the browser to send requests from your page to NEXT
 ## Examples
 
 This repository contains different examples for widgets:
-* [Minimal example](examples/minimal.html): Barebone widget that sends the minimal amount of fields
+* [Minimal example](examples/minimal.html): Barebone widget that queries all themes and sends the minimal amount of fields
 * [Theme page example](examples/theme-page.html): A styled theme page which contains a widget to submit opportunities for this theme.
 
 To run the examples:
@@ -47,6 +47,13 @@ The API is documented with JSON schemas that you can use to validate requests an
 * [Request schema](https://collaborne.api.nextapp.co/v1/schema/create-opportunity.json)
 * [Response schema](https://collaborne.api.nextapp.co/v1/schema/opportunity-created.json)
 * [Error schema](https://collaborne.api.nextapp.co/v1/schema/create-opportunity-error.json)
+
+### Fetch all themes
+
+`POST https://${TENANT}.api.nextapp.co/v1/themes`
+* [Request schema](https://collaborne.api.nextapp.co/v1/schema/fetch-themes.json)
+* [Response schema](https://collaborne.api.nextapp.co/v1/schema/themes-fetched.json)
+* [Error schema](https://collaborne.api.nextapp.co/v1/schema/fetch-themes-error.json)
 
 ## Security considerations
 
@@ -72,12 +79,6 @@ Please contact us beforehand in case you consider to:
 * Open the widget to the general public, expecting many opportunities to be created (more than 5 opportunities posted per seconds in average)
 
 ## FAQ
-
-### Q: How can I show a themes selector?
-
-NEXT doesn't allow to query for themes via the integration API for security reasons.
-
-You can create a static theme selector by looking up the theme IDs in the NEXT application (e.g. from browser URL) and then build a selector in your application accordingly.
 
 ### Q: Can users end up with multiple NEXT accounts?
 

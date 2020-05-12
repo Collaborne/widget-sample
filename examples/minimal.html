@@ -7,14 +7,36 @@
 		</script>
 	</head>
 	<body>
-		<input id="theme" placeholder="Theme ID"><br>
+		<select id="theme"></select><br>
 		<input id="email" placeholder="me@example.com"><br>
 		<input id="name" placeholder="Opportunity"><br>
 		<button id="button">Create</button>
 	</body>
 
 	<script>
-		const API_ENDPOINT = `https://${TENANT}.api.nextapp.co/v1/opportunities`;
+		const API_ENDPOINT = `https://${TENANT}.api.nextapp.co/v1`;
+
+		async function getThemes() {
+			// Create payload for NEXT request
+			const data = {
+				tenant: TENANT,
+				token: TOKEN,
+			};
+
+			// Send request to NEXT
+			const response = await fetch(`${API_ENDPOINT}/themes`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(data),
+			});
+			const json = await response.json();
+			if (!response.ok) {
+				throw new Error(`${json.reason} (${json.details || '-'})`);
+			}
+			return json.themes;
+		}
 
 		async function postOpportunity(themeId, email, name) {
 			// Create payload for NEXT request
@@ -29,7 +51,7 @@
 			};
 
 			// Send request to NEXT
-			const response = await fetch(API_ENDPOINT, {
+			const response = await fetch(`${API_ENDPOINT}/opportunities`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -43,9 +65,22 @@
 			return json;
 		}
 
-		const buttonEl = document.getElementById('button');
+		// Fill themes selector with available themes
+		async function initThemesSelector() {
+			const themes = await getThemes();
+
+			const themeEl = document.getElementById('theme');
+			themes.forEach(theme => {
+				const option = document.createElement('OPTION');
+				option.value = theme.id;
+				option.appendChild(document.createTextNode(theme.name));
+				themeEl.appendChild(option);
+			});
+		}
+		initThemesSelector();
 
 		// Post opportunities when the user clicks the [Create] button
+		const buttonEl = document.getElementById('button');
 		buttonEl.addEventListener('click', async () => {
 			buttonEl.disabled = true;
 
