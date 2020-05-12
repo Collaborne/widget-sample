@@ -6,8 +6,6 @@ Sample widget | NEXT theme page
 ------------- | -------------
 ![Sample widget](img/widget-screenshot.png) | ![Opportunity posted from widget](img/theme-screenshot.png)
 
-_Note: This is an example for a "work-in-progress" integration API. Changes may happen while we're finalizing the API._
-
 ## Background
 
 NEXT provides you with an sophisticated UI to manage innovation. Yet, some scenarios ask for a lighter, more integrated experience. Namely, organizations want to source innovation opportunities from a wide range of people, through a place that they feel comfortable with. One such place could be your existing intranet running on a Content Management System such as Microsoft SharePoint.
