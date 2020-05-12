@@ -40,6 +40,10 @@ To run the examples:
 ## API reference
 
 The API is documented with JSON schemas that you can use to validate requests and responses:
+
+### Create an opportunity
+
+`POST https://${TENANT}.api.nextapp.co/v1/opportunities`
 * [Request schema](https://collaborne.api.nextapp.co/v1/schema/create-opportunity.json)
 * [Response schema](https://collaborne.api.nextapp.co/v1/schema/opportunity-created.json)
 * [Error schema](https://collaborne.api.nextapp.co/v1/schema/create-opportunity-error.json)
@@ -48,12 +52,12 @@ The API is documented with JSON schemas that you can use to validate requests an
 
 Please review the following considerations before deploying this or a simple widget:
 
-* Users are looked up by their email address, if no user with that email address exists a new user are created with access level "Full User".
+* Users are looked up by their email address, if no user with that email address exists a new user is created with access level "Full User".
 
 * The creation of opportunities respects the normal NEXT permissions. For example, creating an opportunity with a guest user will lead to an error. You therefore should show the widget only to users who can create opportunities.
 
 * The client token is exposed in the widget, and it allows anyone to trigger the creation of opportunities and new users. The widget should therefore be deployed into a trusted environment (intranet with authentication/authorization checks, not the public internet).
-  You can additionally mitigate the risk by sending the REST request to NEXT from the backend part of your application.
+  You can additionally mitigate the risk by sending the REST request to NEXT from the backend part of your application, thereby not exposing the token to the browser.
 
 ## Support
 
