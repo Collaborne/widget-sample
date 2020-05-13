@@ -17,19 +17,12 @@
 		const API_ENDPOINT = `https://${TENANT}.api.nextapp.co/v1`;
 
 		async function getThemes() {
-			// Create payload for NEXT request
-			const data = {
-				tenant: TENANT,
-				token: TOKEN,
-			};
-
 			// Send request to NEXT
 			const response = await fetch(`${API_ENDPOINT}/themes`, {
-				method: 'POST',
+				method: 'GET',
 				headers: {
-					'Content-Type': 'application/json',
+					'Authorization': `Bearer ${TOKEN}`,
 				},
-				body: JSON.stringify(data),
 			});
 			const json = await response.json();
 			if (!response.ok) {
@@ -45,15 +38,14 @@
 				opportunity: {
 					name,
 				},
-				tenant: TENANT,
 				theme_id: themeId,
-				token: TOKEN,
 			};
 
 			// Send request to NEXT
 			const response = await fetch(`${API_ENDPOINT}/opportunities`, {
 				method: 'POST',
 				headers: {
+					'Authorization': `Bearer ${TOKEN}`,
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify(data),

@@ -70,7 +70,7 @@
 	</body>
 
 	<script>
-		const API_ENDPOINT = `https://${TENANT}.api.nextapp.co/v1/opportunities`;
+		const API_ENDPOINT = `https://${TENANT}.api.nextapp.co/v1`;
 
 		async function postOpportunity(themeId, email, name, description, labelsStr) {
 			// Extract list of labels from comma-separated list of labels
@@ -84,15 +84,14 @@
 					description,
 					labels,
 				},
-				tenant: TENANT,
 				theme_id: themeId,
-				token: TOKEN,
 			};
 
 			// Send request to NEXT
-			const response = await fetch(API_ENDPOINT, {
+			const response = await fetch(`${API_ENDPOINT}/opportunities`, {
 				method: 'POST',
 				headers: {
+					'Authorization': `Bearer ${TOKEN}`,
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify(data),

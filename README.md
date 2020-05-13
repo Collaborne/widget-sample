@@ -38,6 +38,11 @@ To run the examples:
 
 ## API reference
 
+The API requires to send the NEXT token in the `Authorization` header with each request:
+```
+Authorization: Bearer 12345678-9012-3456-7890-123456789012
+```
+
 The API is documented with JSON schemas that you can use to validate requests and responses:
 
 ### Create an opportunity
@@ -49,10 +54,14 @@ The API is documented with JSON schemas that you can use to validate requests an
 
 ### Fetch all themes
 
-`POST https://${TENANT}.api.nextapp.co/v1/themes`
-* [Request schema](https://collaborne.api.nextapp.co/v1/schema/fetch-themes.json)
+`GET https://${TENANT}.api.nextapp.co/v1/themes`
 * [Response schema](https://collaborne.api.nextapp.co/v1/schema/themes-fetched.json)
 * [Error schema](https://collaborne.api.nextapp.co/v1/schema/fetch-themes-error.json)
+
+Example:
+```sh
+curl -H "Authorization: Bearer <YOUR TOKEN>" https://<YOUR TENANT>.api.nextapp.co/v1/themes
+```
 
 ## Security considerations
 
