@@ -18,11 +18,10 @@ The example uses JavaScript ES6, which runs in modern browsers like Chrome and F
 
 Execute these steps to create a NEXT widget:
 
-1. Get the client token from the NEXT Administration app
-2. Look up the theme IDs in the NEXT app (e.g. from the browser URL)
-3. Copy the [sample code](examples/) to your application and adjust it according to your programming language
-4. Send a REST call when the [Post] button is clicked. See the code sample for the required fields.
-5. Show feedback to user that an opportunity was posted, an account was created, or any errors that occurred
+1. Create a client token from the NEXT Administration app (https://_\<MY-TENANT\>_.nextapp.co/admin/)
+2. Copy the [sample code](examples/) to your application and adjust it according to your programming language
+3. Send a REST call when the [Post] button is clicked. See the code sample for the required fields.
+4. Show feedback to user that an opportunity was posted, an account was created, or any errors that occurred
 
 Tip: You might have to allow the browser to send requests from your page to NEXT (e.g. add _tenant_.nextapp.co to the Content Security Policy of your page).
 
